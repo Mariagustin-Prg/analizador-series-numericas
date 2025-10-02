@@ -1,9 +1,10 @@
 # backend/funciones_numericas.py
+# https://github.com/Mariagustin-Prg/analizador-series-numericas
 ''' 
 Funciones numéricas para el análisis de series numéricas. 
 ''' 
 
-
+import numpy as np
 from typing import Iterable
 
 def MaximoComunDivisor(value_1: int, value_2: int) -> int:
@@ -43,3 +44,30 @@ def MCD_iterable(values: Iterable[int]) -> int:
         mcd = MaximoComunDivisor(mcd, value) # Actualiza el MCD con el MCD del valor actual y el MCD anterior
 
     return mcd # Retorna el MCD final
+
+
+# --------------------------------------------------
+# Media y Desviación Estándar
+def media(values: Iterable[int]) -> float:
+    """
+    Calcula la media (promedio) de una lista de números.
+
+    Args:
+        values (Iterable[int]): Una lista o iterable de números.
+
+    Returns:
+        float: La media de los números en la lista.
+    """
+    return np.mean(values) # Retorna la media de los valores usando numpy
+
+def sigma(values: Iterable[int]) -> float:
+    """
+    Calcula la desviación estándar de una lista de números.
+
+    Args:
+        values (Iterable[int]): Una lista o iterable de números.
+
+    Returns:
+        float: La desviación estándar de los números en la lista.
+    """
+    return np.std(values) # Retorna la desviación estándar de los valores usando numpy
