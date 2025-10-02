@@ -71,3 +71,37 @@ def sigma(values: Iterable[int]) -> float:
         float: La desviación estándar de los números en la lista.
     """
     return np.std(values) # Retorna la desviación estándar de los valores usando numpy
+
+# --------------------------------------------------
+# Primalidad de números
+def es_primo(n: int) -> bool:
+    """
+    Determina si un número es primo.
+
+    Args:
+        n (int): El número a verificar.
+
+    Returns:
+        bool: True si el número es primo, False en caso contrario.
+    """
+    if n <= 1: # Si n es menor o igual a 1, no es primo
+        return False # Retorna Falso
+    
+    for i in range(2, int(np.sqrt(n)) + 1, 1):  # Recorre desde 2 hasta la raíz cuadrada de n
+        if n % i == 0: # Si n es divisible por i, entonces no es primo
+            return False # Retorna Falso
+        
+    return True # Si no se encontró ningún divisor, entonces n es primo, retorna True
+
+def primos_en_lista(values: Iterable[int]) -> list[int]:
+    """
+    Filtra y retorna los números primos de una lista.
+
+    Args:
+        values (Iterable[int]): Una lista o iterable de números enteros.
+
+    Returns:
+        list[int]: Una lista de números primos encontrados en la entrada.
+    """
+    primos = [value for value in values if es_primo(value)] # Usa una comprensión de listas para filtrar los números primos
+    return primos # Retorna la lista de números primos
