@@ -1,5 +1,6 @@
 numpy
 fastapi
 pymongo
+uvicorn
 gunicorn
 python-dotenv
