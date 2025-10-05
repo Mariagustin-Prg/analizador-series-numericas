@@ -18,9 +18,13 @@ def MaximoComunDivisor(value_1: int, value_2: int) -> int:
     Returns:
         int: El máximo común divisor de los dos números.
     """
-    if not (isinstance(value_1, int) and not isinstance(value_2, int)): # Si no se ingresan dos enteros
+    if not (
+        (isinstance(value_1, int) and isinstance(value_2, int))
+            ): # Si no se ingresan dos enteros
         raise ValueError("Ambos valores deben ser enteros.") # Retorna un error
-    
+    elif value_1 < 1 or value_2 < 1: # Si alguno de los valores es menor o igual a 0
+        raise ValueError("Ambos valores deben ser enteros positivos.") # Retorna un error
+
     min_value = min(value_1, value_2)
 
     for i in range(min_value, 0, -1): # Recorre desde el valor mínimo de entre los dos valores hasta 1
@@ -37,7 +41,9 @@ def MCD_iterable(values: Iterable[int]) -> int:
     Returns:
         int: El máximo común divisor de los números en la lista.
     """
-    
+    if not isinstance(values, Iterable): # Si values no es un iterable
+        raise ValueError("La funcion espera un valor iterable.") # Retorna un error
+
     mcd = values[0] # Inicializa el MCD con el primer valor de la lista
 
     for value in values[1:]: # Recorre los valores restantes en la lista
@@ -58,7 +64,12 @@ def media(values: Iterable[int]) -> float:
     Returns:
         float: La media de los números en la lista.
     """
-    return np.mean(values) # Retorna la media de los valores usando numpy
+    if not isinstance(values, Iterable): # Si values no es un iterable
+        raise ValueError("La funcion espera un valor iterable.") # Retorna un error
+    if isinstance(values, str): # Si values es una cadena de texto, genera problemas con el método np.mean()
+        raise ValueError("La funcion espera un valor iterable de numeros.") # Retorna un error
+
+    return np.mean(values, dtype=np.float64) # Retorna la media de los valores usando numpy
 
 def sigma(values: Iterable[int]) -> float:
     """
@@ -70,7 +81,10 @@ def sigma(values: Iterable[int]) -> float:
     Returns:
         float: La desviación estándar de los números en la lista.
     """
-    return np.std(values) # Retorna la desviación estándar de los valores usando numpy
+    if not isinstance(values, Iterable): # Si values no es un iterable
+        raise ValueError("La funcion espera un valor iterable.") # Retorna un error
+
+    return np.std(values, dtype=np.float64) # Retorna la desviación estándar de los valores usando numpy
 
 # --------------------------------------------------
 # Primalidad de números
@@ -84,8 +98,12 @@ def es_primo(n: int) -> bool:
     Returns:
         bool: True si el número es primo, False en caso contrario.
     """
+    if not isinstance(n, int): # Si n no es un entero
+        raise ValueError("El valor debe ser un entero.") # Retorna un error
+    
+
     if n <= 1: # Si n es menor o igual a 1, no es primo
-        return False # Retorna Falso
+        raise ValueError("El valor debe ser un entero positivo mayor a 1.") # Retorna un error
     
     for i in range(2, int(np.sqrt(n)) + 1, 1):  # Recorre desde 2 hasta la raíz cuadrada de n
         if n % i == 0: # Si n es divisible por i, entonces no es primo
@@ -103,5 +121,14 @@ def primos_en_lista(values: Iterable[int]) -> list[int]:
     Returns:
         list[int]: Una lista de números primos encontrados en la entrada.
     """
+    if not isinstance(values, Iterable): # Si values no es un iterable
+        raise ValueError("La funcion espera un valor iterable.") # Retorna un error
+    elif isinstance(values, str): # Si values es una cadena de texto, genera problemas con el método es_primo()
+        raise ValueError("La funcion espera un valor iterable de numeros.") # Retorna un error
+    
     primos = [value for value in values if es_primo(value)] # Usa una comprensión de listas para filtrar los números primos
     return primos # Retorna la lista de números primos
+
+
+if __name__ == "__main__":
+    pass
